@@ -12,6 +12,10 @@ builds/*
 *.log
 .classpath
 .project
+*.err.log.lck
+*.iml
 
 hs_err_pid*
 /bin/
+.idea/
+out/

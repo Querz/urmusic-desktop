@@ -458,8 +458,12 @@ public class Urmusic extends Application {
 			props.prettytime = Utils.prettyTime(props.time);
 			props.prettyduration = Utils.prettyTime(props.duration);
 		}
-		
-		ExpressionEngine.ENGINE.update(props);
+
+		try {
+			ExpressionEngine.ENGINE.update(props);
+		} catch (Exception e) {
+			System.out.println("invalid expression");
+		}
 	}
 	
 	private static void loop(long now) {
