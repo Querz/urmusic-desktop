@@ -184,7 +184,7 @@ public class JSONProjectCodec {
 						int b = (int) (c.getBlue() * 255);
 						int a = (int) (c.getOpacity() * 255);
 						
-						obj.set(f.getName(), "#" + Integer.toString(r, 16) + Integer.toString(g, 16) + Integer.toString(b, 16) + Integer.toString(a, 16));
+						obj.set(f.getName(), "#" + colorToString(r) + colorToString(g) + colorToString(b) + colorToString(a));
 					} else if(f.getType() == Boolean.TYPE) obj.set(f.getName(), (boolean) f.get(sge));
 					else if(f.getType().isEnum()) obj.set(f.getName(), f.get(sge).toString());
 					else if(SectionTarget.class.isAssignableFrom(f.getType())) {
@@ -204,7 +204,7 @@ public class JSONProjectCodec {
 								int b = (int) (c.getBlue() * 255);
 								int a = (int) (c.getOpacity() * 255);
 								
-								targetObject.set(targetF.getName(), "#" + Integer.toString(r, 16) + Integer.toString(g, 16) + Integer.toString(b, 16) + Integer.toString(a, 16));
+								targetObject.set(targetF.getName(), "#" + colorToString(r) + colorToString(g) + colorToString(b) + colorToString(a));
 							} else if(targetF.getType() == Boolean.TYPE) targetObject.set(targetF.getName(), (boolean) targetF.get(target));
 							else if(targetF.getType().isEnum()) targetObject.set(targetF.getName(), targetF.get(target).toString());
 							else targetObject.set(targetF.getName(), targetF.get(target).toString());
@@ -283,7 +283,7 @@ public class JSONProjectCodec {
 					int b = (int) (c.getBlue() * 255);
 					int a = (int) (c.getOpacity() * 255);
 					
-					root.set(f.getName(), "#" + Integer.toString(r, 16) + Integer.toString(g, 16) + Integer.toString(b, 16) + Integer.toString(a, 16));
+					root.set(f.getName(), "#" + colorToString(r) + colorToString(g) + colorToString(b) + colorToString(a));
 				} else root.set(f.getName(), f.get(settings).toString());
 			} catch(IllegalArgumentException e) {
 				e.printStackTrace();
@@ -317,5 +317,10 @@ public class JSONProjectCodec {
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private static String colorToString(int color) {
+		String c = "" + Integer.toString(color, 16);
+		return c.length() == 1 ? "0" + c : c;
 	}
 }
